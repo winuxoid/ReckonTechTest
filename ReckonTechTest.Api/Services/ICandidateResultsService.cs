@@ -6,6 +6,6 @@ namespace ReckonTechTest.Api.Services
     {
         Task<T> GetCandidateAsync<T>(string path);
         Task<HttpResponseMessage> SaveCandidateAsync(string path, CandidateModel model);
-
+        void FindTextOccurences(CandidateModel candidate, SubTextModel subText);
     }
 }

@@ -1,8 +1,6 @@
-using ReckonTechTest.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http.Headers;
-using System.Text.Json;
 using ReckonTechTest.Api.Services;
+using ReckonTechTest.Shared.Models;
 
 namespace ReckonTest.Api.Controllers
 {
@@ -34,7 +32,7 @@ namespace ReckonTest.Api.Controllers
                 var candidate = await _candidate.GetCandidateAsync<CandidateModel>("test2/textToSearch");
                 var subText = await _candidate.GetCandidateAsync<SubTextModel>("test2/subTexts");
 
-                FindTextOccurences(candidate, subText);
+                _candidate.FindTextOccurences(candidate, subText);
                 candidate.Candidate = "Alwin Bombita";
                 return Ok(candidate);
             }
@@ -44,43 +42,17 @@ namespace ReckonTest.Api.Controllers
             }
         }
 
-        private static void FindTextOccurences(CandidateModel candidate, SubTextModel subText)
-        {
-            foreach (var strTarget in subText.SubTexts)
-            {
-                List<string> arrStringResult = new List<string>();
-                var strIndex = 0;
-                foreach (string str in candidate.Text.Split(' '))
-                {
-                    var curStr = str.Trim();
-                    var strLen = 0;
-                    foreach (char c in curStr)
-                    {
-                        strIndex++;
-                        if (char.ToLower(c) == char.ToLower(strTarget[strLen]))
-                            strLen++;
-
-                        if (strLen == strTarget.Trim().Length)
-                        {
-                            arrStringResult.Add((strIndex - (strTarget.Trim().Length - 1)).ToString());
-                            strLen = 0;
-                        }
-                    }
-
-                    strIndex++;
-
-                }
-
-                AddIndexOfOccurences(candidate, strTarget, arrStringResult);
-            }
-        }
-
+        /// <summary>
+        /// Finds all the occurrences of a particular set of characters in a string from supplied endpoints as reference data
+        /// and saves the result to an external API
+        /// </summary>
+        /// <returns>CandidateModel</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<CandidateModel>> SaveCandidateResults()
+        public async Task<ActionResult<string>> SaveCandidateResults()
         {
             try
             {
@@ -88,7 +60,7 @@ namespace ReckonTest.Api.Controllers
                 var candidate = await _candidate.GetCandidateAsync<CandidateModel>("test2/textToSearch");
                 var subText = await _candidate.GetCandidateAsync<SubTextModel>("test2/subTexts");
 
-                FindTextOccurences(candidate, subText);
+                _candidate.FindTextOccurences(candidate, subText);
                 candidate.Candidate = "Alwin Bombita";
                 var response = _candidate.SaveCandidateAsync("test2/submitResults", candidate);
                 var responseBody = await response.Result.Content.ReadAsStringAsync();
@@ -99,15 +71,6 @@ namespace ReckonTest.Api.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, e.ToString());
             }
-        }
-
-        private static void AddIndexOfOccurences(CandidateModel candidate, string strTarget, List<string> arrStringResult)
-        {
-            candidate.Results.Add(new ResultModel
-            {
-                SubText = strTarget,
-                Result = arrStringResult.Any() ? String.Join(", ", arrStringResult) : "<No Output>"
-            });
         }
     }
 }
