@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReckonTechTest.Api", "ReckonTechTest.Api\ReckonTechTest.Api.csproj", "{874C4869-AF9A-4A81-B52C-4583E5417BEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReckonTechTest.Shared", "ReckonTechTest.Shared\ReckonTechTest.Shared.csproj", "{DFC5E8B1-EF0F-4B17-967D-DF2F48D0933B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{874C4869-AF9A-4A81-B52C-4583E5417BEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{874C4869-AF9A-4A81-B52C-4583E5417BEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{874C4869-AF9A-4A81-B52C-4583E5417BEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{874C4869-AF9A-4A81-B52C-4583E5417BEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFC5E8B1-EF0F-4B17-967D-DF2F48D0933B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFC5E8B1-EF0F-4B17-967D-DF2F48D0933B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFC5E8B1-EF0F-4B17-967D-DF2F48D0933B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFC5E8B1-EF0F-4B17-967D-DF2F48D0933B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B25ABCD6-6F54-4597-A9E5-BCBA3C771143}
+	EndGlobalSection
+EndGlobal
